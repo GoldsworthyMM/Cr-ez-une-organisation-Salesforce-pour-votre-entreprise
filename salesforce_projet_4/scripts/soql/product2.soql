@@ -1,0 +1,3 @@
+SELECT Id, Name, Description, Family, IsActive, ProductCode, QuantityUnitOfMeasure, StockKeepingUnit, QuantityInStock__c, sellerId, SourceProductId FROM Product2
+ 
+
