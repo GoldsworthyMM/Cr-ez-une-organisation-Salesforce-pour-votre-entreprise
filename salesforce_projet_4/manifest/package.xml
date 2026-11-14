@@ -3,6 +3,7 @@
     <types>
         <members>OpportunityProductController</members>
         <members>OpportunityProductControllerTest</members>
+        <members>VitesseTestDataFactory</members>
         <name>ApexClass</name>
     </types>
     <types>
