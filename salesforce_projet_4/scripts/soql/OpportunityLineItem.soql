@@ -1,0 +1,9 @@
+SELECT  Id, 
+        Product2Id, 
+        Product2.Name, 
+        Quantity, 
+        UnitPrice, 
+        TotalPrice, 
+        Product2.QuantityInStock__c,
+        IsStockInsufficient__c
+FROM    OpportunityLineItem
