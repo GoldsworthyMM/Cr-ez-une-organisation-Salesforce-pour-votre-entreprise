@@ -14,6 +14,11 @@
         <name>CustomField</name>
     </types>
     <types>
+        <members>Can_View_Product</members>
+        <name>CustomPermission</name>
+    </types>
+    <types>
+        <members>Admin</members>
         <members>Commercial</members>
         <members>Custom: Support Profile</members>
         <name>Profile</name>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsStockInsufficient__c</fullName>
+    <description>Indique si la quantité commandée sur la ligne d&apos;opportunité dépasse le stock disponible du produit (Quantity &gt; QuantityInStock__c). Utilisé pour l&apos;alerte visuelle LWC et le blocage du Flow.</description>
+    <formula>Quantity &gt; PricebookEntry.Product2.QuantityInStock__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Coché automatiquement lorsque la quantité demandée dépasse le stock disponible pour ce produit.</inlineHelpText>
+    <label>IsStockInsufficient</label>
+    <type>Checkbox</type>
+</CustomField>
