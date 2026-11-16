@@ -1,7 +1,6 @@
 /**
  * Classe de test unitaire pour OpportunityProductController.
- * Vérifie la récupération des lignes, l'indicateur de stock, le cas d'un identifiant null
- * et l'accès en lecture du profil Commercial.
+ * Vérifie la gestion d'un identifiant null et l'accès du profil Commercial au point d'entrée.
  *
  * @author MM
  * @date 10/11/2026
@@ -15,46 +14,6 @@ private class OpportunityProductControllerTest {
     @TestSetup
     static void setupTestData() {
         VitesseTestDataFactory.createOpportunityWithProductLine();
-    }
-
-    /**
-     * Vérifie que le contrôleur retourne les lignes et les champs attendus lorsque le stock
-     * du produit est suffisant pour la quantité de la ligne.
-     */
-    @IsTest
-    static void testGetOpportunityLineItemsReturnsExpectedRecords() {
-        // Récupère l'opportunité préparée par les données de test.
-        Opportunity opportunity = getTestOpportunity();
-
-        // Démarre la portion du test dont on veut mesurer l'exécution et isoler les limites.
-        Test.startTest();
-        List<OpportunityLineItem> opportunityLineItems =
-            OpportunityProductController.getOpportunityLineItems(opportunity.Id);
-        Test.stopTest();
-
-        // Le jeu de test contient une seule ligne pour cette opportunité.
-        System.assertEquals(1, opportunityLineItems.size(), 'Une ligne de produit doit être retournée.');
-
-        // La ligne retournée doit être celle du produit créé pour le test.
-        System.assertEquals(
-            'Tesla Model S Test',
-            opportunityLineItems.get(0).Product2.Name,
-            'Le nom du produit doit correspondre.'
-        );
-
-        // Le contrôleur doit retourner la valeur de stock du produit.
-        System.assertEquals(
-            10,
-            opportunityLineItems.get(0).Product2.QuantityInStock__c,
-            'Le stock doit être égal à 10.'
-        );
-
-        // Une quantité commandée de 2 sur un stock de 10 ne constitue pas une rupture.
-        System.assertEquals(
-            false,
-            opportunityLineItems.get(0).IsStockInsufficient__c,
-            'Le stock étant suffisant (2 <= 10), la formule doit valoir false.'
-        );
     }
 
     /**
