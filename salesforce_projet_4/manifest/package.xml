@@ -14,15 +14,32 @@
         <name>CustomField</name>
     </types>
     <types>
+        <members>Opp_Products_Title</members>
+        <members>Col_Product_Name</members>
+        <members>Col_Quantity</members>
+        <members>Col_Unit_Price</members>
+        <members>Col_Total_Price</members>
+        <members>Col_Quantity_In_Stock</members>
+        <members>Col_Delete</members>
+        <members>Col_View_Product</members>
+        <members>Msg_No_Products</members>
+        <members>Msg_Stock_Insufficient</members>
+        <members>Err_Flow_Stock_Insufficient</members>
+        <name>CustomLabel</name>
+    </types>
+    <types>
         <members>Can_View_Product</members>
         <name>CustomPermission</name>
     </types>
+    <!-- Les profils sont déjà récupérés et nettoyés localement. Décommenter uniquement si besoin de les ré-aspirer :
     <types>
         <members>Admin</members>
         <members>Commercial</members>
         <members>Custom: Support Profile</members>
         <name>Profile</name>
     </types>
+    -->
+
     <types>
         <members>fr</members>
         <name>Translations</name>

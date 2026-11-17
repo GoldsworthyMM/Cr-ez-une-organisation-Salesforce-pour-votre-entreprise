@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Col_Delete</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Colonne / Infobulle Supprimer</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>Col_Product_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Colonne Nom du produit</shortDescription>
+        <value>Product Name</value>
+    </labels>
+    <labels>
+        <fullName>Col_Quantity</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Colonne Quantité</shortDescription>
+        <value>Quantity</value>
+    </labels>
+    <labels>
+        <fullName>Col_Quantity_In_Stock</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Colonne Quantité en stock</shortDescription>
+        <value>Quantity in Stock</value>
+    </labels>
+    <labels>
+        <fullName>Col_Total_Price</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Colonne Prix total</shortDescription>
+        <value>Total Price</value>
+    </labels>
+    <labels>
+        <fullName>Col_Unit_Price</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Colonne Prix unitaire</shortDescription>
+        <value>Unit Price</value>
+    </labels>
+    <labels>
+        <fullName>Col_View_Product</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Colonne / Bouton Voir produit</shortDescription>
+        <value>See Product</value>
+    </labels>
+    <labels>
+        <fullName>Err_Flow_Stock_Insufficient</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Erreur bloquante Flow (Closed Won)</shortDescription>
+        <value>Your opportunity cannot be updated because you have a quantity issue on your product lines.</value>
+    </labels>
+    <labels>
+        <fullName>Msg_No_Products</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message état vide (aucune ligne)</shortDescription>
+        <value>You have no product lines. To add products, please follow these steps: 1. Select a Price Book from the &quot;Price Book&quot; section. 2. Add the products you need.</value>
+    </labels>
+    <labels>
+        <fullName>Msg_Stock_Insufficient</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Alerte rupture de stock LWC</shortDescription>
+        <value>You have at least one line with a quantity issue. Please delete the line or reduce the quantity. If you need more units, please contact your System Administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Opp_Products_Title</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Titre du composant LWC</shortDescription>
+        <value>Opportunity Products</value>
+    </labels>
+</CustomLabels>

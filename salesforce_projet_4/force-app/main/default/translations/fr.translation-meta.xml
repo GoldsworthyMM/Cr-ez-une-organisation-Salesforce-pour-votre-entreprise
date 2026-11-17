@@ -1,3 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Translations xmlns="http://soap.sforce.com/2006/04/metadata"/>
-
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customLabels>
+        <label>Supprimer</label>
+        <name>Col_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>Nom du produit</label>
+        <name>Col_Product_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>Quantité</label>
+        <name>Col_Quantity</name>
+    </customLabels>
+    <customLabels>
+        <label>Quantité en Stock</label>
+        <name>Col_Quantity_In_Stock</name>
+    </customLabels>
+    <customLabels>
+        <label>Prix Total</label>
+        <name>Col_Total_Price</name>
+    </customLabels>
+    <customLabels>
+        <label>Prix unitaire</label>
+        <name>Col_Unit_Price</name>
+    </customLabels>
+    <customLabels>
+        <label>Voir produit</label>
+        <name>Col_View_Product</name>
+    </customLabels>
+    <customLabels>
+        <label>Votre opportunité ne peut pas être mise à jour car vous avez un souci de quantité sur vos lignes.</label>
+        <name>Err_Flow_Stock_Insufficient</name>
+    </customLabels>
+    <customLabels>
+        <label>Vous n&apos;avez aucune ligne de produits. Pour ajouter des produits, veuillez suivre ces étapes : 1. Sélectionnez un Catalogue de prix dans la section &quot;Catalogue de prix&quot;. 2. Ajoutez les produits dont vous avez besoin.</label>
+        <name>Msg_No_Products</name>
+    </customLabels>
+    <customLabels>
+        <label>Vous avez au moins une ligne avec un souci de quantité. Veuillez supprimer la ligne ou réduire la quantité. Si vous avez besoin de plus d&apos;unités, veuillez contacter votre Système Administrateur.</label>
+        <name>Msg_Stock_Insufficient</name>
+    </customLabels>
+    <customLabels>
+        <label>Opportunité produits</label>
+        <name>Opp_Products_Title</name>
+    </customLabels>
+</Translations>
