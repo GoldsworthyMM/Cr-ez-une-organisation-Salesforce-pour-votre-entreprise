@@ -27,6 +27,7 @@ Cette commande va exécuter du code Apex contenu dans la classe - remplacer "tes
 
 ```bash
 sf apex run --target-org testusername@salesforce.org --file scripts/apex/DataCreationScript.apex
+sf apex run --target-org testusername@salesforce.org --file scripts/apex/activateCatalogProducts.apex
 ```
 
 3. Vous pouvez commencer à coder votre projet !

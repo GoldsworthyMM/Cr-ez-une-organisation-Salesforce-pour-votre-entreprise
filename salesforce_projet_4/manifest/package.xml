@@ -31,6 +31,18 @@
         <members>Can_View_Product</members>
         <name>CustomPermission</name>
     </types>
+    <types>
+        <members>Opportunity_Record_Page</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>opportunityProductsList</members>
+        <name>LightningComponentBundle</name>
+    </types>
+    <types>
+        <members>Product2-Product Layout</members>
+        <name>Layout</name>
+    </types>
     <!-- Les profils sont déjà récupérés et nettoyés localement. Décommenter uniquement si besoin de les ré-aspirer :
     <types>
         <members>Admin</members>
@@ -39,7 +51,6 @@
         <name>Profile</name>
     </types>
     -->
-
     <types>
         <members>fr</members>
         <name>Translations</name>

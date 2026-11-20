@@ -56,19 +56,19 @@
         <shortDescription>Erreur bloquante Flow (Closed Won)</shortDescription>
         <value>Your opportunity cannot be updated because you have a quantity issue on your product lines.</value>
     </labels>
-    <labels>
-        <fullName>Msg_No_Products</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Message état vide (aucune ligne)</shortDescription>
-        <value>You have no product lines. To add products, please follow these steps: 1. Select a Price Book from the &quot;Price Book&quot; section. 2. Add the products you need.</value>
-    </labels>
+ <labels>
+     <fullName>Msg_No_Products</fullName>
+     <language>en_US</language>
+     <protected>false</protected>
+     <shortDescription>Message état vide (aucune ligne)</shortDescription>
+     <value>You have no product lines at the moment.&#10;1. Please first select a Pricebook&#10;2. Then select the products to add.</value>
+ </labels>
     <labels>
         <fullName>Msg_Stock_Insufficient</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Alerte rupture de stock LWC</shortDescription>
-        <value>You have at least one line with a quantity issue. Please delete the line or reduce the quantity. If you need more units, please contact your System Administrator.</value>
+        <value>You have at least one line with a quantity issue, please delete this line or reduce its quantity.&#10;If you definitely need more products, please contact your system administrator.</value>
     </labels>
     <labels>
         <fullName>Opp_Products_Title</fullName>

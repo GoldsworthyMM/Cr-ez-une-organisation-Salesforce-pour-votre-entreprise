@@ -1,0 +1,93 @@
+<template>
+    <lightning-card title={labels.title} icon-name="standard:opportunity">
+        <div class="slds-p-around_medium">
+
+            <!-- Indicateur de chargement -->
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Chargement" size="small"></lightning-spinner>
+            </template>
+
+            <!-- État 1 : Aucune ligne de produit (Guide utilisateur aligné à gauche sur 3 lignes) -->
+            <template lwc:elseif={hasNoProducts}>
+                <p class="slds-text-body_regular" style="white-space: pre-line;">{labels.noProductsMessage}</p>
+            </template>
+
+            <!-- État 2 : Tableau des lignes de produits -->
+            <template lwc:else>
+
+                <!-- Bandeau d'alerte orange profond aligné à gauche sur 2 lignes -->
+                <template lwc:if={hasStockIssue}>
+                    <div class="custom-warning-banner slds-p-around_small slds-m-bottom_medium" role="alert">
+                        <p style="white-space: pre-line;">{labels.stockInsufficientMessage}</p>
+                    </div>
+                </template>
+
+                <!-- Tableau responsive SLDS -->
+                <div class="slds-scrollable_x">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered responsive-table" aria-label={labels.title}>
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th scope="col"><div class="slds-truncate" title={labels.colProductName}>{labels.colProductName}</div></th>
+                                <th scope="col"><div class="slds-truncate" title={labels.colQuantity}>{labels.colQuantity}</div></th>
+                                <th scope="col"><div class="slds-truncate" title={labels.colUnitPrice}>{labels.colUnitPrice}</div></th>
+                                <th scope="col"><div class="slds-truncate" title={labels.colTotalPrice}>{labels.colTotalPrice}</div></th>
+                                <th scope="col"><div class="slds-truncate" title={labels.colQuantityInStock}>{labels.colQuantityInStock}</div></th>
+                                <th scope="col"><div class="slds-truncate" title={labels.colDelete}>{labels.colDelete}</div></th>
+                                <template lwc:if={canViewProduct}>
+                                    <th scope="col"><div class="slds-truncate" title={labels.colViewProduct}>{labels.colViewProduct}</div></th>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={lineItems} for:item="item">
+                                <tr key={item.Id} class="slds-hint-parent">
+                                    <td data-label={labels.colProductName}>
+                                        <div class="slds-truncate" title={item.productName}>{item.productName}</div>
+                                    </td>
+                                    <td data-label={labels.colQuantity} class={item.quantityCellClass}>
+                                        <div>
+                                            <lightning-formatted-number value={item.Quantity}></lightning-formatted-number>
+                                        </div>
+                                    </td>
+                                    <td data-label={labels.colUnitPrice}>
+                                        <lightning-formatted-number value={item.UnitPrice} format-style="currency"></lightning-formatted-number>
+                                    </td>
+                                    <td data-label={labels.colTotalPrice}>
+                                        <lightning-formatted-number value={item.TotalPrice} format-style="currency"></lightning-formatted-number>
+                                    </td>
+                                    <td data-label={labels.colQuantityInStock}>
+                                        <lightning-formatted-number value={item.quantityInStock}></lightning-formatted-number>
+                                    </td>
+                                    <!-- Action Supprimer (bouton natif SLDS 2) -->
+                                    <td data-label={labels.colDelete}>
+                                        <lightning-button-icon
+                                            icon-name="utility:delete"
+                                            alternative-text={labels.colDelete}
+                                            title={labels.colDelete}
+                                            variant="border-filled"
+                                            data-id={item.Id}
+                                            onclick={handleDelete}>
+                                        </lightning-button-icon>
+                                    </td>
+                                    <!-- Action Voir produit (bouton bleu natif SLDS 2 réservé aux Administrateurs) -->
+                                    <template lwc:if={canViewProduct}>
+                                        <td data-label={labels.colViewProduct}>
+                                            <lightning-button
+                                                label={labels.colViewProduct}
+                                                icon-name="utility:preview"
+                                                variant="brand"
+                                                data-product-id={item.Product2Id}
+                                                onclick={handleViewProduct}>
+                                            </lightning-button>
+                                        </td>
+                                    </template>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

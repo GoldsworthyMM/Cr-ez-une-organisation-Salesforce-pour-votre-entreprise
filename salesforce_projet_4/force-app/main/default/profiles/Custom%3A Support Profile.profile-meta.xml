@@ -20,4 +20,8 @@
         <readable>true</readable>
     </fieldPermissions>
     <userLicense>Salesforce</userLicense>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>LightningExperienceUser</name>
+    </userPermissions>
 </Profile>

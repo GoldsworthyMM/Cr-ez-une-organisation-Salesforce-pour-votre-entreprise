@@ -1,0 +1,69 @@
+/* En-têtes de colonnes bien visibles en gras */
+.responsive-table thead th {
+    font-weight: 700;
+    color: #181818;
+}
+
+/* Bandeau orange profond conforme à la maquette des spécifications */
+.custom-warning-banner {
+    background-color: #c25900;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 0.25rem;
+}
+
+/* Fond gris et texte rouge en gras appliqués uniquement sur la cellule Quantité en rupture */
+.cell-stock-error {
+    background-color: #ecebea !important;
+    color: #ba0517 !important;
+    font-weight: 700;
+}
+
+/* Adaptation responsive pour l'affichage sur mobile (Facteur de forme Phone) */
+@media screen and (max-width: 767px) {
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table,
+    .responsive-table tbody,
+    .responsive-table tr,
+    .responsive-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .responsive-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #dddbda;
+        border-radius: 0.25rem;
+        padding: 0.5rem;
+        background-color: #ffffff;
+    }
+
+    .responsive-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.4rem 0.5rem;
+        border-bottom: 1px solid #f3f3f3;
+        text-align: right;
+    }
+
+    .responsive-table td:last-child {
+        border-bottom: none;
+    }
+
+    .responsive-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        text-align: left;
+        margin-right: 1rem;
+        color: #444444;
+    }
+
+    .responsive-table td.cell-stock-error {
+        background-color: #ecebea;
+        color: #ba0517;
+    }
+}
