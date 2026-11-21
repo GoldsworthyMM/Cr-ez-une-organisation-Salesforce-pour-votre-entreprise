@@ -10,8 +10,8 @@
 import { LightningElement, api, wire } from 'lwc';
 // Permet d'ouvrir la fiche d'un enregistrement dans la navigation Lightning.
 import { NavigationMixin } from 'lightning/navigation';
-// API Lightning Data Service utilisée pour supprimer une ligne de produit.
-import { deleteRecord } from 'lightning/uiRecordApi';
+// API Lightning Data Service : deleteRecord supprime une ligne et getRecord observe l'Opportunity.
+import { deleteRecord, getRecord } from 'lightning/uiRecordApi';
 // Permet de relire les données mises en cache par un wire Apex.
 import { refreshApex } from '@salesforce/apex';
 // Affiche les notifications toast de succès ou d'erreur.
@@ -125,6 +125,15 @@ export default class OpportunityProductsList extends NavigationMixin(LightningEl
     /* -------------------------------------------------------------------------
      * 4. RÉCUPÉRATION DES DONNÉES ET GESTION DES ÉTATS
      * ---------------------------------------------------------------------- */
+
+    // Suit les mises à jour de l'Opportunity signalées par Lightning Data Service, notamment après l'usage de la modale Products.
+    @wire(getRecord, { recordId: '$recordId', fields: ['Opportunity.LastModifiedDate'] })
+    wiredOpportunityRecord({ data }) {
+        // Quand l'Opportunity change, relit les lignes du wire Apex si son résultat est déjà disponible.
+        if (data && this.wiredResult) {
+            refreshApex(this.wiredResult);
+        }
+    }
 
     // Récupère les lignes de produits de l'opportunité courante via le contrôleur Apex.
     @wire(getOpportunityLineItems, { opportunityId: '$recordId' })
