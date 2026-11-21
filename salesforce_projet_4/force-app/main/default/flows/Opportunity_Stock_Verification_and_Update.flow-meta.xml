@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <description>Renseigne l&apos;identifiant du véhicule et son nouveau stock calculé dans la variable tampon varProductToUpdate, puis l&apos;ajoute à la collection colProductsToUpdate pour une mise à jour en masse.</description>
+        <name>Prepare_Product_Stock_Update</name>
+        <label>Prepare Product Stock Update</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>varProductToUpdate.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Through_Line_Items.Product2Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>varProductToUpdate.QuantityInStock__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>formulaNewStock</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>colProductsToUpdate</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>varProductToUpdate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Through_Line_Items</targetReference>
+        </connector>
+    </assignments>
+    <customErrors>
+        <description>Bloque le passage de l&apos;opportunité au statut Closed Won lorsqu&apos;au moins un produit présente un stock insuffisant et affiche un message d&apos;erreur traduit.</description>
+        <name>Block_Closed_Won_Insufficient_Stock</name>
+        <label>Block Closed Won - Insufficient Stock</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Loop_Through_Line_Items</targetReference>
+        </connector>
+        <customErrorMessages>
+            <errorMessage>{!$Label.Err_Flow_Stock_Insufficient}</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <description>Vérifie si la quantité demandée sur la ligne d&apos;opportunité dépasse le stock disponible du véhicule (IsStockInsufficient__c).</description>
+        <name>Check_Stock_Availability</name>
+        <label>Check Stock Availability</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Prepare_Product_Stock_Update</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Stock Sufficient</defaultConnectorLabel>
+        <rules>
+            <name>Stock_Insufficient</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Loop_Through_Line_Items.IsStockInsufficient__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Block_Closed_Won_Insufficient_Stock</targetReference>
+            </connector>
+            <label>Stock Insufficient</label>
+        </rules>
+    </decisions>
+    <description>Vérifie la disponibilité des stocks des véhicules (Product2) lors du passage d&apos;une opportunité au statut Closed Won. Bloque la validation via un message d&apos;erreur personnalisé si au moins une quantité dépasse le stock disponible, sinon décrémente automatiquement QuantityInStock__c en masse (bulkified).</description>
+    <ends>
+        <name>END_ELEMENT_1</name>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+    </ends>
+    <environments>Default</environments>
+    <formulas>
+        <description>Calcule le nouveau stock disponible en soustrayant la quantité vendue du stock actuel.</description>
+        <name>formulaNewStock</name>
+        <dataType>Number</dataType>
+        <expression>{!Loop_Through_Line_Items.Product2.QuantityInStock__c}-{!Loop_Through_Line_Items.Quantity}</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Opportunity - Stock Verification and Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Opportunity - Stock Verification and Update</label>
+    <loops>
+        <description>Parcourt chaque ligne de produit pour contrôler le stock et préparer la mise à jour.</description>
+        <name>Loop_Through_Line_Items</name>
+        <label>Loop Through Line Items</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>Get_Opportunity_Line_Item</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Check_Stock_Availability</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Product_Stocks</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Récupère toutes les lignes de produits liées à l&apos;opportunité passée en Closed Won.</description>
+        <name>Get_Opportunity_Line_Item</name>
+        <label>Get Opportunity Line Item</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Loop_Through_Line_Items</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>OpportunityId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>OpportunityLineItem</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Quantity</queriedFields>
+        <queriedFields>Product2Id</queriedFields>
+        <queriedFields>IsStockInsufficient__c</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Met à jour en base de données la quantité en stock de tous les véhicules de l&apos;opportunité en une seule opération DML (bulkified).</description>
+        <name>Update_Product_Stocks</name>
+        <label>Update Product Stocks</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>END_ELEMENT_1</targetReference>
+        </connector>
+        <inputReference>colProductsToUpdate</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Opportunity_Line_Item</targetReference>
+        </connector>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>StageName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Closed Won</stringValue>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Collection de tous les véhicules à mettre à jour en une seule opération DML après la boucle.</description>
+        <name>colProductsToUpdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Product2</objectType>
+    </variables>
+    <variables>
+        <description>Variable tampon représentant un véhicule dont le stock doit être décrémenté.</description>
+        <name>varProductToUpdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Product2</objectType>
+    </variables>
+</Flow>

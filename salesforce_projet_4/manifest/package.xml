@@ -36,6 +36,10 @@
         <name>FlexiPage</name>
     </types>
     <types>
+        <members>Opportunity_Stock_Verification_and_Update</members>
+        <name>Flow</name>
+    </types>
+    <types>
         <members>opportunityProductsList</members>
         <name>LightningComponentBundle</name>
     </types>
