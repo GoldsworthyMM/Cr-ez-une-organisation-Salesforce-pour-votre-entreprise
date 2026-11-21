@@ -56,13 +56,13 @@
         <shortDescription>Erreur bloquante Flow (Closed Won)</shortDescription>
         <value>Your opportunity cannot be updated because you have a quantity issue on your product lines.</value>
     </labels>
- <labels>
-     <fullName>Msg_No_Products</fullName>
-     <language>en_US</language>
-     <protected>false</protected>
-     <shortDescription>Message état vide (aucune ligne)</shortDescription>
-     <value>You have no product lines at the moment.&#10;1. Please first select a Pricebook&#10;2. Then select the products to add.</value>
- </labels>
+    <labels>
+        <fullName>Msg_No_Products</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message état vide (aucune ligne)</shortDescription>
+        <value>You have no product lines at the moment.&#10;1. Please first select a Pricebook&#10;2. Then select the products to add.</value>
+    </labels>
     <labels>
         <fullName>Msg_Stock_Insufficient</fullName>
         <language>en_US</language>

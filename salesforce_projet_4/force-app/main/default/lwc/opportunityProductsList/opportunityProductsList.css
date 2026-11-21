@@ -1,3 +1,10 @@
+/**
+ * Feuille de styles du composant OpportunityProductsList.
+ * Définit l'apparence des alertes, des cellules de stock et du tableau responsive.
+ *
+ * @author MM
+ * @date 20/11/2026
+ */
 /* En-têtes de colonnes bien visibles en gras */
 .responsive-table thead th {
     font-weight: 700;
@@ -21,10 +28,12 @@
 
 /* Adaptation responsive pour l'affichage sur mobile (Facteur de forme Phone) */
 @media screen and (max-width: 767px) {
+    /* Masque l'en-tête, car chaque ligne affiche ensuite ses propres libellés. */
     .responsive-table thead {
         display: none;
     }
 
+    /* Empile les éléments du tableau sur toute la largeur de l'écran. */
     .responsive-table,
     .responsive-table tbody,
     .responsive-table tr,
@@ -33,6 +42,7 @@
         width: 100%;
     }
 
+    /* Présente chaque ligne comme une carte blanche avec bordure et coins arrondis. */
     .responsive-table tr {
         margin-bottom: 1rem;
         border: 1px solid #dddbda;
@@ -41,6 +51,7 @@
         background-color: #ffffff;
     }
 
+    /* Aligne le libellé à gauche et la valeur à droite dans chaque cellule. */
     .responsive-table td {
         display: flex;
         justify-content: space-between;
@@ -50,10 +61,12 @@
         text-align: right;
     }
 
+    /* Retire la bordure basse de la dernière cellule pour fermer proprement la carte. */
     .responsive-table td:last-child {
         border-bottom: none;
     }
 
+    /* Affiche à gauche le libellé fourni par data-label, puisque l'en-tête est masqué. */
     .responsive-table td::before {
         content: attr(data-label);
         font-weight: 700;
@@ -62,6 +75,7 @@
         color: #444444;
     }
 
+    /* Préserve le contraste de l'avertissement de stock sur la cellule mobile. */
     .responsive-table td.cell-stock-error {
         background-color: #ecebea;
         color: #ba0517;
